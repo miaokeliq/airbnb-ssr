@@ -1,0 +1,9 @@
+button{
+    width: 300px;
+    color: $red
+}
+
+.text{
+    @include line-text-overflow;
+    width: 50px;
+}
