@@ -47,7 +47,7 @@ export default class DB {
   updateItem(storeName: string, data: any) {
     // 新建事务                      读写模式
     const store = this.db
-      .transaction([storeName], "readwrite")
+      .transaction(storeName, "readwrite")
       .objectStore(storeName);
     // 接收对象
     const request = store.put({
@@ -71,7 +71,7 @@ export default class DB {
   deleteItem(storeName: string, key: number | string) {
     // 新建事务                      读写模式
     const store = this.db
-      .transaction([storeName], "readwrite")
+      .transaction(storeName, "readwrite")
       .objectStore(storeName);
     // 接收对象
     const request = store.delete(key);

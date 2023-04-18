@@ -29,6 +29,7 @@
 import zhCn from "element-plus/lib/locale/lang/zh-cn";
 import en from "element-plus/lib/locale/lang/en";
 import { ref, defineEmits } from "vue";
+import { saveLanguageApi, fetchLanguageApi } from "../../api/layout";
 const activeIndex = ref("orders");
 
 const emit = defineEmits<{
@@ -37,10 +38,39 @@ const emit = defineEmits<{
 function handleSelect(e: any) {
   if (e === "zh") {
     emit("changeLang", zhCn);
+    saveLanguage("zh");
   } else if (e === "en") {
     emit("changeLang", en);
+    saveLanguage("en");
   }
 }
+
+// Mock 接口： 保存当前语言包
+function saveLanguage(language: any) {
+  saveLanguageApi(language).then((res) => {
+    let { success } = res;
+    if (success) {
+      console.log("保存当前语言包成功");
+    }
+  });
+}
+
+function getLanguage() {
+  fetchLanguageApi().then((res: any) => {
+    const { success, result } = res;
+    const { name } = result;
+    if (success) {
+      if (name === "zh") {
+        emit("changeLang", zhCn);
+      } else if (name === "en") {
+        emit("changeLang", en);
+      }
+      console.log("获取当前语言包成功");
+    }
+  });
+}
+
+getLanguage();
 </script>
 
 <style scoped lang="scss">
