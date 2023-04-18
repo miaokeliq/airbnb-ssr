@@ -2,14 +2,14 @@
   display: flex;
   justify-content: space-between;
   width: 100%;
-  height: 70px;
+  height: 80px;
   position: relative;
   align-items: center;
   .logo {
-    width: 162px;
+    width: 200px;
     height: auto;
     position: absolute;
-    top: 10px;
+    top: 17px;
     left: 15px;
     z-index: 10;
   }
@@ -17,17 +17,19 @@
     width: inherit;
     padding: 0 25px;
     justify-content: right;
-    height: 70px;
+    height: 80px;
     align-items: center;
     .el-menu-item {
-      height: 70px;
+      height: 80px;
       font-size: 16px;
       &:last-child {
         padding-right: 0;
       }
     }
-    .el-sub-menu__title {
-      font-size: 16px !important;
+    .el-sub-menu {
+      .el-sub-menu__title {
+        font-size: 16px !important;
+      }
     }
   }
   .avatar {

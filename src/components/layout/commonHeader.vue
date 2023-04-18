@@ -74,5 +74,5 @@ getLanguage();
 </script>
 
 <style scoped lang="scss">
-@import "../../assets/scss/layout/index.scss";
+@import "@/assets/scss/layout/commonHeader.scss";
 </style>

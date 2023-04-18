@@ -3,7 +3,8 @@ import { useI18n } from "vue-i18n";
 import { ref } from "vue";
 import zhCn from "element-plus/lib/locale/lang/zh-cn";
 import en from "element-plus/lib/locale/lang/en";
-import headerCommon from "./components/layout/headerCommon.vue";
+import commonHeader from "./components/layout/commonHeader.vue";
+import commonFooter from "./components/layout/commonFooter.vue";
 
 const { locale: localeLanguage } = useI18n();
 // const { t } = useI18n();
@@ -20,9 +21,11 @@ const changeLang = (language: any) => {
 <template>
   <el-config-provider :locale="locale">
     <!-- 头部 -->
-    <headerCommon @changeLang="changeLang" />
+    <commonHeader @changeLang="changeLang" />
     <!-- 主体 -->
     <router-view />
+    <!-- 底部 -->
+    <commonFooter @changeLang="changeLang" />
   </el-config-provider>
 </template>
 
