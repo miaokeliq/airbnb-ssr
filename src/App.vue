@@ -23,10 +23,14 @@ const changeLang = (language: any) => {
     <!-- 头部 -->
     <commonHeader @changeLang="changeLang" />
     <!-- 主体 -->
-    <router-view />
+    <div class="container"><router-view /></div>
     <!-- 底部 -->
     <commonFooter @changeLang="changeLang" />
   </el-config-provider>
 </template>
 
-<style scoped lang="scss"></style>
+<style lang="scss">
+.container {
+  min-height: calc(100vh - 402px);
+}
+</style>
