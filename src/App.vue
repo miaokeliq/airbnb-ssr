@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useRoute } from "vue-router";
 import { useI18n } from "vue-i18n";
 import { ref } from "vue";
 import zhCn from "element-plus/lib/locale/lang/zh-cn";
@@ -8,8 +9,9 @@ import commonFooter from "./components/layout/commonFooter.vue";
 
 const { locale: localeLanguage } = useI18n();
 // const { t } = useI18n();
-// const router = useRouter();
+const route = useRoute();
 
+console.log(route);
 const locale = ref(zhCn);
 const changeLang = (language: any) => {
   locale.value = language;
@@ -21,11 +23,17 @@ const changeLang = (language: any) => {
 <template>
   <el-config-provider :locale="locale">
     <!-- 头部 -->
-    <commonHeader @changeLang="changeLang" />
+    <commonHeader
+      v-show="!route.fullPath.indexOf('login')"
+      @changeLang="changeLang"
+    />
     <!-- 主体 -->
     <div class="container"><router-view /></div>
     <!-- 底部 -->
-    <commonFooter @changeLang="changeLang" />
+    <commonFooter
+      v-show="!route.fullPath.indexOf('login')"
+      @changeLang="changeLang"
+    />
   </el-config-provider>
 </template>
 
