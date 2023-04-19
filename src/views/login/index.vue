@@ -5,26 +5,28 @@
       <div class="login-panel">
         <!-- tabs -->
         <el-tabs v-model="activeName" @tab-click="handleClick">
-          <el-tab-pane label="登录" name="login"></el-tab-pane>
-          <el-tab-pane label="注册" name="sign"></el-tab-pane>
+          <el-tab-pane :label="t('login.loginTab')" name="login"></el-tab-pane>
+          <el-tab-pane :label="t('login.signTab')" name="sign"></el-tab-pane>
         </el-tabs>
         <!-- 表单组件 -->
         <el-form ref="ruleFormRef" :model="ruleForm" :rules="rules">
           <el-form-item prop="mobile">
             <el-input
-              placeholder="请输入正确的手机号"
+              :placeholder="t('login.placeMobile')"
               v-model="ruleForm.mobile"
             />
           </el-form-item>
           <el-form-item prop="password">
             <el-input
-              placeholder="请输入正确的密码"
+              :placeholder="t('login.placePass')"
               v-model="ruleForm.password"
             />
           </el-form-item>
 
           <el-form-item>
-            <el-button class="login-btn" @click="submitForm">登录</el-button>
+            <el-button class="login-btn" @click="submitForm">{{
+              loginText
+            }}</el-button>
           </el-form-item>
         </el-form>
       </div>
@@ -35,28 +37,33 @@
 <script setup lang="ts">
 import { useRouter, useRoute } from "vue-router";
 import { ref, reactive } from "vue";
-const router = useRouter();
-const route = useRoute();
+import { useI18n } from "vue-i18n";
+interface IRuleForm {
+  mobile: string;
+  password: string;
+}
+
+const { t } = useI18n();
+const loginText = ref(t("login.loginBtn"));
 const ruleFormRef = ref();
-const ruleForm = reactive({
+const ruleForm: IRuleForm = reactive({
   mobile: "",
   password: "",
 });
-
 const rules = reactive({
   mobile: [
     {
       required: true,
       min: 11,
       max: 11,
-      message: "请输入正确的手机号码",
+      message: t("login.placeMobile"),
       trigger: "blur",
     },
   ],
   password: [
     {
       required: true,
-      message: "请输入正确的密码",
+      message: t("login.placePass"),
       trigger: "blur",
     },
   ],
@@ -65,6 +72,13 @@ const activeName = ref("login");
 
 function handleClick(e: any) {
   console.log(e);
+  let { name, label } = e.props;
+  if (name === "login") {
+    loginText.value = t("login.loginBtn");
+  } else if (name === "sign") {
+    loginText.value = t("login.signBtn");
+  }
+  console.log(name, label);
 }
 
 function submitForm() {
@@ -76,7 +90,6 @@ function submitForm() {
     }
   });
 }
-console.log(route.query);
 </script>
 
 <style lang="scss">

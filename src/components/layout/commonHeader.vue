@@ -21,6 +21,9 @@
           class="avatar"
         />
       </el-menu-item>
+      <el-menu-item index="login">
+        {{ t("login.loginTab") }} / {{ t("login.signTab") }}
+      </el-menu-item>
     </el-menu>
   </div>
 </template>
@@ -31,10 +34,11 @@ import en from "element-plus/lib/locale/lang/en";
 import { ref, defineEmits } from "vue";
 import { saveLanguageApi, fetchLanguageApi } from "../../api/layout";
 import { useI18n } from "vue-i18n";
-
+import { useRouter } from "vue-router";
 const { t } = useI18n();
 const activeIndex = ref("orders");
 
+const router = useRouter();
 const emit = defineEmits<{
   (e: "changeLang", language: any): void;
 }>();
@@ -45,6 +49,8 @@ function handleSelect(e: any) {
   } else if (e === "en") {
     emit("changeLang", en);
     saveLanguage("en");
+  } else if (e === "login") {
+    router.push({ name: "login" });
   }
 }
 

@@ -24,14 +24,14 @@ const changeLang = (language: any) => {
   <el-config-provider :locale="locale">
     <!-- 头部 -->
     <commonHeader
-      v-show="!route.fullPath.indexOf('login')"
+      v-show="route.fullPath.indexOf('login') === -1"
       @changeLang="changeLang"
     />
     <!-- 主体 -->
     <div class="container"><router-view /></div>
     <!-- 底部 -->
     <commonFooter
-      v-show="!route.fullPath.indexOf('login')"
+      v-show="route.fullPath.indexOf('login') === -1"
       @changeLang="changeLang"
     />
   </el-config-provider>
